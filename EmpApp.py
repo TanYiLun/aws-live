@@ -44,11 +44,12 @@ def registerAccount():
     insert_sql = "INSERT INTO user VALUES (%s, %s)"
     check_sql = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
+    userid_no = int(cursor.execute(check_sql, (user_id)))
 
     if user_confirm_password!=user_password:
         return "Password does not match with confirm password"
 
-    if (cursor.execute(check_sql, (user_id))!=0:
+    if (userid_no)!=0:
         return "User Id already exist"
 
     try:
