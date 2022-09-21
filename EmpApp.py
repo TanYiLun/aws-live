@@ -37,7 +37,7 @@ def toRegisterPage():
 
 @app.route("/Register", methods=['POST', 'GET'])
 def registerAccount():
-    user_id = lower(request.form['user_id'])
+    user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
     user_confirm_password = request.form["user_confirm_password"]
 
