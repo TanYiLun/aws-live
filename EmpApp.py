@@ -176,8 +176,8 @@ def InsertSalary():
       #  finally:
      #       cursor.close()
 
-        print("Successfully registered, redirecting to login page")
-        return render_template("LoginPage.html")
+    #print("Successfully registered, redirecting to login page")
+    return ("Successfully registered, redirecting to login page")
 
 
 if __name__ == '__main__':
