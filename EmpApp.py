@@ -73,25 +73,19 @@ def LoginUser():
     user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
 
-    check_id = "SELECT * FROM user WHERE user_id=(%s)"
-    check_pw = "SELECT * FROM user WHERE user_password=(%s)"
+    check_id = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
+    check_pw = "SELECT COUNT(user_password) FROM user WHERE user_password=(%s)"
     correct_id = False
     correct_pw = False
     cursor = db_conn.cursor()
-    cursor.execute(check_id, (user_id))
-    userid_exists=cursor.fetchall()
-    cursor.close()
-    cursor = db_conn.cursor()
-    cursor.execute(check_pw, (user_password))
-    userpassword_exists=cursor.fetchall()
 
-    if str(userpassword_exists) != "()":
-        correct_pw = True
-
-    if str(userid_exists) != "()":
+    if (cursor.execute(check_id, (user_id)))>0:
         correct_id = True
+
+    if (cursor.execute(check_pw, (user_password)))>0:
+        correct_pw = True
    
-    if correct_id == True and correct_pw == True:
+    if correct_id and correct_pw:
         print("Login successful")
         return render_template('AddEmp.html')
     else:
@@ -153,6 +147,11 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
+
+
+@app.route("/InsertSalary", methods=['POST', 'GET'])
+def InsertSalary():
+    return "Hi"
 
 
 if __name__ == '__main__':
