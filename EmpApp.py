@@ -161,7 +161,7 @@ def InsertSalary():
  
 
     insert_sql = "INSERT INTO salary VALUES (%s, %s, %s)"
-    check_sql = "SELECT * FROM salary WHERE user_id=(%s)"
+    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
     userid_no=cursor.fetchall()
