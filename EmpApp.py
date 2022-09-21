@@ -37,6 +37,7 @@ def toRegisterPage():
 
 @app.route("/Register", methods=['POST', 'GET'])
 def registerAccount():
+#to read user
     user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
     user_confirm_password = request.form["user_confirm_password"]
@@ -65,7 +66,7 @@ def registerAccount():
 
 @app.route("/LoginUser", methods=['POST', 'GET'])
 def LoginUser():
-    user_id = lower(request.form['user_id'])
+    user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
 
     check_id = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
