@@ -181,7 +181,7 @@ def InsertSalary():
     cursor.close()
 
     #print("Successfully registered, redirecting to login page")
-    return ("Successfully uploaded") + user_id + "'s salary'")
+    return ("Successfully uploaded" + user_id + "'s salary'")
 
 
 if __name__ == '__main__':
