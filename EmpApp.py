@@ -166,19 +166,18 @@ def InsertSalary():
     cursor.execute(check_sql, (user_id))
     userid_no=cursor.fetchall()
 
-    #if user_confirm_password!=user_password:
-    #    print("Confirm your password again")
-    #    return render_template('RegisterPage.html')
-    #elif str(userid_no) != "()":
-    #    print("User Id already exist")
-    #    return render_template('RegisterPage.html')
-   # else:
-      #  try:
+   
+    if str(userid_no) != "()":
+        cursor.execute(insert_sql, (user_id, user_salary, salary_status))
+        
+    else 
+        print("User does not exist")
+        return render_template('SalaryPage.html')
+
 #
-    cursor.execute(insert_sql, (user_id, user_salary, salary_status))
+
     db_conn.commit()
 
-      #  finally:
     cursor.close()
 
     #print("Successfully registered, redirecting to login page")
