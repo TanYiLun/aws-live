@@ -155,7 +155,7 @@ def InsertSalary():
     user_id = (request.form['user_id']).lower()
     user_salary = request.form['user_salary']
 
-    insert_sql = "INSERT INTO salary VALUES (%s, %d)"
+    insert_sql = "INSERT INTO salary VALUES (%s, %s)"
     check_sql = "SELECT * FROM salary WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
