@@ -31,7 +31,7 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-@app.route("/RegisterPageRoute", methods=['POST'])
+@app.route("/RegisterPageRoute", methods=['POST', 'GET'])
 def toRegisterPage():
     return render_template('RegisterPage.html')
 
