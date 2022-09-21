@@ -46,8 +46,7 @@ def registerAccount():
     check_sql = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
-    db_conn.commit()
-    userid_no=(cursor.fetchall())
+    userid_no=cursor.fetchall()
 
     if user_confirm_password!=user_password:
         print("Confirm your password again")
