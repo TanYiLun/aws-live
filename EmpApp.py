@@ -48,7 +48,7 @@ def registerAccount():
     if user_confirm_password!=user_password:
         return "Password does not match with confirm password"
 
-    if (cursor.execute(check_sql, (user_id)))!=0
+    if (cursor.execute(check_sql, (user_id))!=0:
         return "User Id already exist"
 
     try:
@@ -73,10 +73,10 @@ def registerAccount():
     correct_pw = False
     cursor = db_conn.cursor()
 
-    if (cursor.execute(check_id, (user_id)))>0
+    if (cursor.execute(check_id, (user_id)))>0:
         correct_id = True
 
-    if (cursor.execute(check_pw, (user_password)))>0
+    if (cursor.execute(check_pw, (user_password)))>0:
         correct_pw = True
    
     if correct_id and correct_pw:
