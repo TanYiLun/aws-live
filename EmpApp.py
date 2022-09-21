@@ -151,7 +151,33 @@ def AddEmp():
 
 @app.route("/InsertSalary", methods=['POST', 'GET'])
 def InsertSalary():
-    return "Hi"
+    #to read user
+    user_id = (request.form['user_id']).lower()
+    user_salary = request.form['user_salary']
+
+    insert_sql = "INSERT INTO salary VALUES (%s, %d)"
+    check_sql = "SELECT * FROM salary WHERE user_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (user_id))
+    userid_no=cursor.fetchall()
+
+    #if user_confirm_password!=user_password:
+    #    print("Confirm your password again")
+    #    return render_template('RegisterPage.html')
+    #elif str(userid_no) != "()":
+    #    print("User Id already exist")
+    #    return render_template('RegisterPage.html')
+   # else:
+      #  try:
+#
+       #     cursor.execute(insert_sql, (user_id, user_password))
+       #     db_conn.commit()
+
+      #  finally:
+     #       cursor.close()
+
+        print("Successfully registered, redirecting to login page")
+        return render_template("LoginPage.html")
 
 
 if __name__ == '__main__':
