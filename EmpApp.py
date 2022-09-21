@@ -170,7 +170,7 @@ def InsertSalary():
     if str(userid_no) != "()":
         cursor.execute(insert_sql, (user_id, user_salary, salary_status))
         
-    else 
+    else :
         print("User does not exist")
         return render_template('SalaryPage.html')
 
