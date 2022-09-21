@@ -80,6 +80,8 @@ def LoginUser():
     cursor = db_conn.cursor()
     cursor.execute(check_id, (user_id))
     userid_exists=cursor.fetchall()
+    cursor.close()
+    cursor = db_conn.cursor()
     cursor.execute(check_pw, (user_password))
     userpassword_exists=cursor.fetchall()
 
