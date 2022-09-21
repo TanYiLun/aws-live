@@ -154,12 +154,13 @@ def InsertSalary():
     #to read user
     user_id = (request.form['user_id']).lower()
     user_salary = request.form['user_salary']
+    salary_status = "False"
     if not user_salary.isnumeric():
         print("Invalid Input Only! Please input numbers only")
         return render_template('SalaryPage.html')
  
 
-    insert_sql = "INSERT INTO salary VALUES (%s, %s)"
+    insert_sql = "INSERT INTO salary VALUES (%s, %s, %s)"
     check_sql = "SELECT * FROM salary WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
@@ -174,7 +175,7 @@ def InsertSalary():
    # else:
       #  try:
 #
-    cursor.execute(insert_sql, (user_id, user_salary))
+    cursor.execute(insert_sql, (user_id, user_salary, salary_status))
     db_conn.commit()
 
       #  finally:
