@@ -51,9 +51,9 @@ def registerAccount():
     if user_confirm_password!=user_password:
         print("Confirm your password again")
         return render_template('RegisterPage.html')
-    elif str(userid_no) != None:
+    elif (userid_no) != 0:
         print("User Id already exist")
-        return str(userid_no)
+        return render_template('RegisterPage.html')
     else:
         try:
 
