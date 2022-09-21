@@ -52,7 +52,7 @@ def registerAccount():
         return render_template('RegisterPage.html')
     elif (userid_no)!=0:
         print("User Id already exist")
-        return (userid_no)
+        return str(userid_no)
     else:
         try:
 
