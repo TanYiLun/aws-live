@@ -170,11 +170,11 @@ def InsertSalary():
    # else:
       #  try:
 #
-       #     cursor.execute(insert_sql, (user_id, user_password))
-       #     db_conn.commit()
+    cursor.execute(insert_sql, (user_id, user_salary))
+    db_conn.commit()
 
       #  finally:
-     #       cursor.close()
+    cursor.close()
 
     #print("Successfully registered, redirecting to login page")
     return ("Successfully registered, redirecting to login page")
