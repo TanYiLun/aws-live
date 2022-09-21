@@ -46,14 +46,13 @@ def registerAccount():
     check_sql = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     userid_no = int(cursor.execute(check_sql, (user_id)))
-    return userid_no;
 
     if user_confirm_password!=user_password:
         print("Confirm your password again")
         return render_template('RegisterPage.html')
     elif (userid_no)!=0:
         print("User Id already exist")
-        return render_template('RegisterPage.html')
+        return ("User already exissts")
     else:
         try:
 
