@@ -67,7 +67,7 @@ def registerAccount():
 def registerAccount():
     user_id = lower(request.form['user_id'])
     user_password = request.form['user_password']
-"
+
     check_id = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
     check_pw = "SELECT COUNT(user_password) FROM user WHERE user_password=(%s)"
     correct_id = False
