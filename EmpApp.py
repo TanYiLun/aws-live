@@ -85,11 +85,11 @@ def LoginUser():
     cursor.execute(check_pw, (user_password))
     userpassword_exists=cursor.fetchall()
 
-    if userid_exists!="()":
-        correct_id = True
-
-    if userpassword_exists!="()":
+    if userpassword_exists != "()":
         correct_pw = True
+
+    if userid_exists != "()":
+        correct_id = True
    
     if correct_id == True and correct_pw == True:
         print("Login successful")
