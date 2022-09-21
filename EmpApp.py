@@ -71,7 +71,7 @@ def registerAccount():
 @app.route("/LoginUser", methods=['POST', 'GET'])
 def LoginUser():
     user_id = (request.form['user_id']).lower()
-    user_pw = request.form['user_password']
+    user_password = request.form['user_password']
 
     check_id = "SELECT * FROM user WHERE user_id=(%s)"
     check_pw = "SELECT * FROM user WHERE user_password=(%s)"
@@ -80,13 +80,13 @@ def LoginUser():
     cursor = db_conn.cursor()
     cursor.execute(check_id, (user_id))
     userid_exists=cursor.fetchall()
-    cursor.execute(check_pw, (user_pw))
-    userpw_exists=cursor.fetchall()
+    cursor.execute(check_pw, (user_password))
+    userpassword_exists=cursor.fetchall()
 
     if userid_exists!="()":
         correct_id = True
 
-    if userpw_exists!="()":
+    if userpassword_exists!="()":
         correct_pw = True
    
     if correct_id and correct_pw:
