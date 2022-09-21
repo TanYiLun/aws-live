@@ -48,23 +48,24 @@ def registerAccount():
     userid_no = int(cursor.execute(check_sql, (user_id)))
 
     if user_confirm_password!=user_password:
-        print("Login successful")
+        print("Confirm your password again")
         return render_template('RegisterPage.html')
-
-    if (userid_no)!=0:
+    elif (userid_no)!=0:
         print("User Id already exist")
         return render_template('RegisterPage.html')
+    else:
+        try:
 
-    try:
+            cursor.execute(insert_sql, (user_id, user_password))
+            db_conn.commit()
 
-        cursor.execute(insert_sql, (user_id, user_password))
-        db_conn.commit()
+        finally:
+            cursor.close()
 
-    finally:
-        cursor.close()
+        print("Successfully registered, redirecting to login page")
+        return render_template("LoginPage.html")
 
-    print("Successfully registered, redirecting to login page")
-    return render_template("LoginPage.html")
+    
 
 @app.route("/LoginUser", methods=['POST', 'GET'])
 def LoginUser():
