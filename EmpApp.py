@@ -31,11 +31,11 @@ def home():
 def about():
     return render_template('www.intellipaat.com')
 
-@app.route("/RegisterPageRoute", methods=['POST'])
+@app.route("/RegisterPageRoute")
 def toRegisterPage():
     return render_template('RegisterPage.html')
 
-@app.route("/Register", methods=['POST', 'GET'])
+@app.route("/Register")
 def registerAccount():
     user_id = lower(request.form['user_id'])
     user_password = request.form['user_password']
@@ -63,8 +63,8 @@ def registerAccount():
     print("Successfully registered, redirecting to login page")
     return render_template("LoginPage.html")
 
-@app.route("/LoginUser", methods=['GET'])
-def Login():
+@app.route("/LoginUser")
+def LoginUser():
     user_id = lower(request.form['user_id'])
     user_password = request.form['user_password']
 
