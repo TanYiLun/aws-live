@@ -73,16 +73,20 @@ def LoginUser():
     user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
 
-    check_id = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
-    check_pw = "SELECT COUNT(user_password) FROM user WHERE user_password=(%s)"
+    check_id = "SELECT * FROM user WHERE user_id=(%s)"
+    check_pw = "SELECT * FROM user WHERE user_password=(%s)"
     correct_id = False
     correct_pw = False
     cursor = db_conn.cursor()
+    cursor.execute(check_id, (user_id))
+    userid_exists=cursor.fetchall()
+    cursor.execute(check_pw, (user_pw))
+    userpw_exists=cursor.fetchall()
 
-    if (cursor.execute(check_id, (user_id)))>0:
+    if userid_exists!="()":
         correct_id = True
 
-    if (cursor.execute(check_pw, (user_password)))>0:
+    if userpw_exists!="()":
         correct_pw = True
    
     if correct_id and correct_pw:
