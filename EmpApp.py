@@ -63,7 +63,7 @@ def registerAccount():
     print("Successfully registered, redirecting to login page")
     return render_template("LoginPage.html")
 
-@app.route("/Login", methods=['GET'])
+@app.route("/LoginUser", methods=['GET'])
 def registerAccount():
     user_id = lower(request.form['user_id'])
     user_password = request.form['user_password']
