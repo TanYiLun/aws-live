@@ -83,7 +83,7 @@ def LoginUser():
    
     if correct_id and correct_pw:
         print("Login successful")
-        return render_template('AddEmp.html')
+        return render_template('RegisterPage.html')
     else:
         print("Invalid user id or/and password")
         correct_id = False
