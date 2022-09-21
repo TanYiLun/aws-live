@@ -48,11 +48,11 @@ def registerAccount():
     userid_no = int(cursor.execute(check_sql, (user_id)))
 
     if user_confirm_password!=user_password:
-        flash("Login successful")
+        print("Login successful")
         return render_template('RegisterPage.html')
 
     if (userid_no)!=0:
-        flash("User Id already exist")
+        print("User Id already exist")
         return render_template('RegisterPage.html')
 
     try:
@@ -84,10 +84,10 @@ def LoginUser():
         correct_pw = True
    
     if correct_id and correct_pw:
-        flash("Login successful")
+        print("Login successful")
         return render_template('AddEmp.html')
     else:
-        flash("Invalid user id or/and password")
+        print("Invalid user id or/and password")
         correct_id = False
         correct_pw = False
         return render_template('LoginPage.html')
