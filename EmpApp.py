@@ -64,7 +64,7 @@ def registerAccount():
     return render_template("LoginPage.html")
 
 @app.route("/LoginUser", methods=['GET'])
-def registerAccount():
+def Login():
     user_id = lower(request.form['user_id'])
     user_password = request.form['user_password']
 
