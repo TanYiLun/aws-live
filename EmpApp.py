@@ -43,7 +43,7 @@ def registerAccount():
     user_confirm_password = request.form["user_confirm_password"]
 
     insert_sql = "INSERT INTO user VALUES (%s, %s)"
-    check_sql = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
+    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
     userid_no=cursor.fetchall()
@@ -51,7 +51,7 @@ def registerAccount():
     if user_confirm_password!=user_password:
         print("Confirm your password again")
         return render_template('RegisterPage.html')
-    elif (userid_no)!=0:
+    elif (userid_no) is None:
         print("User Id already exist")
         return render_template('RegisterPage.html')
     else:
