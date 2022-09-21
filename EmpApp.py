@@ -91,7 +91,7 @@ def LoginUser():
    
     if correct_id == True and correct_pw == True:
         print("Login successful")
-        return str(userid_exists) + str(userpassword_exists)
+        return str(userid_exists)
     else:
         print("Invalid user id or/and password")
         correct_id = False
