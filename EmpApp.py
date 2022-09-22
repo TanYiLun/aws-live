@@ -48,7 +48,7 @@ def GetEmp():
     check_sql = "SELECT location FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_lname = cursor.fetchall()
+    emp_location = cursor.fetchall()
     check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
