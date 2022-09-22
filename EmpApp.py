@@ -337,7 +337,7 @@ def ResetSal():
     return render_template('GetSal.html')
 
 @app.route("/returntoSalPage", methods=['GET', 'POST'])
-def GetEmpRoute():
+def returntoSalPage():
     return render_template('PaySal.html')
 
 if __name__ == '__main__':
