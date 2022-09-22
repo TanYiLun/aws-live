@@ -58,7 +58,7 @@ def GetEmp():
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
     emp_image_url = re.sub('\W+','', str(cursor.fetchall()))
-    if str(emp_fname) != "()":
+    if str(emp_fname) != "":
         return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
         lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
     else:
