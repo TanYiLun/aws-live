@@ -161,7 +161,7 @@ def checkInAttendance():
     finally:
         cursor.close()
 
-    return render_template("AttendanceOutput.html", date = datetime.now()),
+    return render_template("AttendanceOutput.html", date = datetime.now(),
     LoginTime = formatted_login)
 
 @app.route("/addemp", methods=['POST'])
