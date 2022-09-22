@@ -187,7 +187,7 @@ def checkOut():
         formatted_checkout = checkOutTime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
 
         try:
-           cursor.execute(insert_statement,(emp_id,formatted_login[0]))
+           cursor.execute(insert_statement,(emp_id,formatted_login[0],formatted_checkout))
            db_conn.commit()
            print("Data inserted")
 
