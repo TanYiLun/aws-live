@@ -26,7 +26,7 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AttendanceTaking.html')
+    return render_template('GetSal.html')
 
 @app.route("/GetEmpRoute", methods=['GET', 'POST'])
 def GetEmpRoute():
@@ -248,12 +248,22 @@ def InsertSalary():
     #print("Successfully registered, redirecting to login page")
     return ("Successfully uploaded" + user_id + "'s salary'")
 
-@app.route("/GetSal", methods=['GET', 'POST'])
-def GetSal():
+@app.route("/PaySal", methods=['GET', 'POST'])
+def PaySal():
     user_id = (request.form['user_id']).lower()
-    check_sql = "SELECT user_salary FROM salary WHERE user_id=(%s)"
+    insert_sql = "UPDATE salary SET check_in = (%(True)s) WHERE emp_id = %(emp_id)s"
+    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
+    userid_no=cursor.fetchall()
+
+   
+    if str(userid_no) != "()":
+        cursor.execute(insert_sql, (user_id))
+        
+    else :
+        print("User does not exist")
+        return render_template('SalaryPage.html')
 
 
 if __name__ == '__main__':
