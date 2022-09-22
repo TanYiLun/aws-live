@@ -27,7 +27,7 @@ def home():
     return render_template('GetEmp.html')
 
 @app.route("/GetEmp", methods=['POST, GET'])
-def about():
+def GetEmp():
     emp_id = (request.form['emp_id']).lower()
     check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
