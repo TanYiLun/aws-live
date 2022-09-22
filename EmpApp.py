@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 from pymysql import connections
+from main import db
 from datetime import datetime
 import os
 import re
