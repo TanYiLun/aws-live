@@ -306,6 +306,10 @@ def PaySal():
         print("User does not exist")
         return render_template('SalaryPage.html')
 
+    db_conn.commit()
+
+    cursor.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
