@@ -287,7 +287,7 @@ def InsertSalary():
     cursor.close()
 
     #print("Successfully registered, redirecting to login page")
-    return ("Successfully uploaded" + user_id + "'s salary'")
+    return render_template('PaySal.html')
 
 @app.route("/PaySal", methods=['GET', 'POST'])
 def PaySal():
@@ -336,6 +336,9 @@ def ResetSal():
 
     return render_template('GetSal.html')
 
+@app.route("/returntoSalPage", methods=['GET', 'POST'])
+def GetEmpRoute():
+    return render_template('PaySal.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
