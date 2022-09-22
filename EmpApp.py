@@ -338,7 +338,7 @@ def ResetSal():
 
 @app.route("/returntoSalPage", methods=['GET', 'POST'])
 def returntoSalPage():
-    return render_template('PaySal.html')
+    return render_template('GetSal.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
