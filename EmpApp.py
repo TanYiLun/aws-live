@@ -53,8 +53,12 @@ def GetEmp():
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
     emp_image_url = cursor.fetchall()
-    return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
-    lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
+    if str(emp_id) != "()":
+        return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
+        lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
+    else:
+        print("Invalid ID")
+        return render_template('GetEmp.html')
 
 @app.route("/about", methods=['POST'])
 def about():
