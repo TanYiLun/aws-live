@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 from pymysql import connections
+from datetime import datetime
 import os
 import re
 import boto3
@@ -136,6 +137,32 @@ def LoginUser():
 @app.route("/LoginPageRoute", methods=['POST'])
 def toLoginPage():
     return render_template('LoginPage.html')
+
+@app.route("/attendanceCheckIn", methods=['POST', 'GET'])
+def checkInAttendance():
+    emp_id = request.form['emp_id']
+
+    update_statement = "UPDATE employee SET check_in = (%(check_in)s) WHERE emp_id = %(emp_id)s"
+
+    cursor = db_conn.cursor()
+
+    LoginTime = datetime.now()
+    formatted_login = LoginTime.strftime('%Y-%m-%d %H:%M:%S')
+    print("Check in time:{}", formatted_login)
+
+    try:
+        cursor.execute(update_statement, {'check_in' : formatted_login, 'emp_id':int(emp_id)})
+        db.conn.commit()
+        print("Data updated")
+    
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+
+    return render_template("AttendanceOutput.html", date = datetime.now()),
+    LoginTime = formatted_login
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
