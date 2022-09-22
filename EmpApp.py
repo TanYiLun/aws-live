@@ -164,45 +164,6 @@ def checkInAttendance():
     return render_template("AttendanceOutput.html", date = datetime.now(),
     LoginTime = formatted_login)
 
-@app.route("/attedance/output",methods=['GET','POST'])
-def checkOut():
-
-    emp_id = request.form['emp_id']
-    select_statement = "SELECT check_in FROM employee WHERE emp_id = %(emp_id)s"
-    insert_statement = "INSERT INTO attendance VALUES (%s,%s,%s,%s)"
-
-    cursor = db_conn.cursor()
-
-    try:
-        cursor.execute(selecy_statement,{'emp_id': int(emp_id)})
-        LoginTime= cursor.fetchall()
-
-        for row in LoginTime:
-            formatted_login = rpw
-            print(formatted_login[0])
-
-        checkOutTime = datetime.now()
-        LoginDate = datetime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
-
-        formatted_checkout = checkOutTime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
-
-        try:
-           cursor.execute(insert_statement,(emp_id,formatted_login[0]))
-           db_conn.commit()
-           print("Data inserted")
-
-         except Exception as e:
-              return str(e)
-
-
-     except Exception as e:
-          return str(e)
-
-     finally:
-          cursor.close()
-
-     return render_template("AttendanceOutput.html", date=datetime.now(),Checkout = formatted_checkout, 
-     LoginTime= formatted_login[0])
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
