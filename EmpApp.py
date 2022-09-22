@@ -178,7 +178,7 @@ def checkOut():
         LoginTime= cursor.fetchall()
 
         for row in LoginTime:
-            formatted_login = rpw
+            formatted_login = row
             print(formatted_login[0])
 
         checkOutTime = datetime.now()
