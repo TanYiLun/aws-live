@@ -169,7 +169,7 @@ def checkOut():
 
     emp_id = request.form['emp_id']
     select_statement = "SELECT check_in FROM employee WHERE emp_id = %(emp_id)s"
-    insert_statement = "INSERT INTO attendance VALUES (%s,%s,%s,%s)"
+    insert_statement = "INSERT INTO attendance VALUES (%s,%s,%s)"
 
     cursor = db_conn.cursor()
 
