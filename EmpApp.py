@@ -26,7 +26,7 @@ table = 'employee'
 def home():
     return render_template('GetEmp.html')
 
-@app.route("/GetEmp", methods=['POST, GET'])
+@app.route("/GetEmp", methods=['GET, POST'])
 def GetEmp():
     emp_id = (request.form['emp_id']).lower()
     check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
