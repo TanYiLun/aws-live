@@ -152,7 +152,7 @@ def checkInAttendance():
 
     try:
         cursor.execute(update_statement, {'check_in' : formatted_login, 'emp_id':int(emp_id)})
-        db.conn.commit()
+        db_conn.commit()
         print("Data updated")
     
     except Exception as e:
