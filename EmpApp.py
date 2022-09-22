@@ -313,5 +313,29 @@ def PaySal():
     return render_template('PaidOutput.html')
 
 
+@app.route("/ResetSal", methods=['GET', 'POST'])
+def ResetSal():
+    user_id = (request.form['user_id']).lower()
+    insert_sql = "UPDATE salary SET salary_status = 'False' WHERE user_id = (%s)"
+    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (user_id))
+    userid_no=cursor.fetchall()
+
+   
+    if str(userid_no) != "()":
+        cursor.execute(insert_sql, (user_id))
+        
+    else :
+        print("User does not exist")
+        return render_template('GetSal.html')
+
+    db_conn.commit()
+
+    cursor.close()
+
+    return render_template('GetSal.html')
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
