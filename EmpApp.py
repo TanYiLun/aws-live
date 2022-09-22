@@ -248,7 +248,7 @@ def InsertSalary():
     #print("Successfully registered, redirecting to login page")
     return ("Successfully uploaded" + user_id + "'s salary'")
 
-    @app.route("/GetSal", methods=['GET', 'POST'])
+@app.route("/GetSal", methods=['GET', 'POST'])
 def GetEmp():
     user_id = (request.form['user_id']).lower()
     check_sql = "SELECT user_salary FROM salary WHERE user_id=(%s)"
