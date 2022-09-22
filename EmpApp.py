@@ -164,7 +164,7 @@ def checkInAttendance():
     return render_template("AttendanceOutput.html", date = datetime.now(),
     LoginTime = formatted_login)
 
-@app.route("/attedance/output",methods=['GET','POST'])
+@app.route("/attendance/output",methods=['GET','POST'])
 def checkOut():
 
     emp_id = request.form['emp_id']
