@@ -251,7 +251,7 @@ def InsertSalary():
 @app.route("/PaySal", methods=['GET', 'POST'])
 def PaySal():
     user_id = (request.form['user_id']).lower()
-    insert_sql = "UPDATE salary SET check_in = (%(True)s) WHERE emp_id = %(emp_id)s"
+    insert_sql = "UPDATE salary SET check_in = (%(True)s) WHERE emp_id = %(user_id)s"
     check_sql = "SELECT * FROM user WHERE user_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (user_id))
