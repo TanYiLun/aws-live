@@ -174,7 +174,7 @@ def checkOut():
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(selecy_statement,{'emp_id': int(emp_id)})
+        cursor.execute(select_statement,{'emp_id': int(emp_id)})
         LoginTime= cursor.fetchall()
 
         for row in LoginTime:
