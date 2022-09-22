@@ -304,13 +304,13 @@ def PaySal():
         
     else :
         print("User does not exist")
-        return render_template('SalaryPage.html')
+        return render_template('GetSal.html')
 
     db_conn.commit()
 
     cursor.close()
 
-    return ("Salary succesfully paid to " + user_id )
+    return render_template('PaidOutput.html')
 
 
 if __name__ == '__main__':
