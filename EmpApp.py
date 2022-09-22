@@ -24,8 +24,37 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('SalaryPage.html')
+    return render_template('GetEmp.html')
 
+@app.route("/GetEmp", methods=['POST, GET'])
+def about():
+    emp_id = (request.form['emp_id']).lower()
+    check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_id = cursor.fetchall()
+    check_sql = "SELECT first_name FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_fname = cursor.fetchall()
+    check_sql = "SELECT last_name FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_lname = cursor.fetchall()
+    check_sql = "SELECT pri_skill FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_interest = cursor.fetchall()
+    check_sql = "SELECT location FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_lname = cursor.fetchall()
+    check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
+    cursor = db_conn.cursor()
+    cursor.execute(check_sql, (emp_id))
+    emp_image_url = cursor.fetchall()
+    return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
+    lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
 
 @app.route("/about", methods=['POST'])
 def about():
