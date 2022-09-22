@@ -128,3 +128,69 @@ label {
 .loginbttm {
     padding: 0px;
 }
+
+.form-container{
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 75vh;
+    background-color: #eceff4;
+    border-radius: 15px;
+    align-self: center;
+    padding: 30px;
+}
+
+.form-container-get{
+    height: 40vh;
+}
+
+.button-container1{
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-self: center;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    margin:auto;
+}
+
+.form-bubble{
+    background-color:#eceff4;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.form-bubble-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 50%;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.login-text {
+    text-align: center;
+    padding-left: 0px;
+    color: #A2A4A4;
+}
+
+.form-button{
+    background-color: #0d75fd;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    padding: 10px 60px;
+    text-align:center;
+    line-height:30px;
+    cursor:pointer;
+    font-weight:500;
+    letter-spacing:0.1em;
+}
