@@ -26,33 +26,37 @@ table = 'employee'
 def home():
     return render_template('GetEmp.html')
 
+@app.route("/GetEmpRoute", methods=['GET', 'POST'])
+def GetEmpRoute():
+    return render_template('GetEmp.html')
+
 @app.route("/GetEmp", methods=['GET', 'POST'])
 def GetEmp():
     emp_id = (request.form['emp_id']).lower()
     check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_id = cursor.fetchall()
+    emp_id = re.sub('\W+','', cursor.fetchall())
     check_sql = "SELECT first_name FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_fname = cursor.fetchall()
+    emp_fname = re.sub('\W+','', cursor.fetchall())
     check_sql = "SELECT last_name FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_lname = cursor.fetchall()
+    emp_lname = re.sub('\W+','', cursor.fetchall())
     check_sql = "SELECT pri_skill FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_interest = cursor.fetchall()
+    emp_interest = re.sub('\W+','', cursor.fetchall())
     check_sql = "SELECT location FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_location = cursor.fetchall()
+    emp_location = re.sub('\W+','', cursor.fetchall())
     check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
     cursor = db_conn.cursor()
     cursor.execute(check_sql, (emp_id))
-    emp_image_url = cursor.fetchall()
+    emp_image_url = re.sub('\W+','', cursor.fetchall())
     if str(emp_id) != "()":
         return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
         lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
