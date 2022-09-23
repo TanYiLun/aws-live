@@ -132,7 +132,7 @@ label {
     padding: 0px;
 }
 
-.form-container{
+.form-attendance{
     margin: 20px 0 0 0;
     display: flex;
     flex-direction: column;
@@ -144,7 +144,7 @@ label {
     padding: 30px;
 }
 
-.form-container-get{
+.form-attendance-2{
     height: 40vh;
 }
 
@@ -160,7 +160,7 @@ label {
     margin:auto;
 }
 
-.form-bubble{
+.bubble{
     background-color:#eceff4;
     border-radius: 15px;
     padding: 15px;
@@ -169,7 +169,7 @@ label {
     flex-wrap: wrap;
 }
 
-.form-bubble-container{
+.bubble-container{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -184,16 +184,37 @@ label {
     color: #A2A4A4;
 }
 
-.form-button{
-    background-color: #0d75fd;
-    border: 0px;
+.check-button{
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border: 0;
     border-radius: 10px;
-    color: white;
-    font-size: 14px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    font-family: Phantomsans, sans-serif;
+    font-size: 15px;
     padding: 10px 60px;
     text-align:center;
     line-height:30px;
     cursor:pointer;
     font-weight:500;
     letter-spacing:0.1em;
+}
+
+.check-button:active,
+.check-button:hover {
+  outline: 0;
+}
+
+.check-button span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.check-button:hover span {
+  background: none;
 }
