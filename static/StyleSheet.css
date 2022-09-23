@@ -256,3 +256,44 @@ label {
   }
 }
 
+.form-container{
+    margin: 20px 0 0 0;
+    display:flex;
+    flex-direction:column;
+    width:50%;
+    height:75vh;
+    background-color : #eceff4;
+    border-radius: 15px;
+    align-self: center;
+    padding: 30px;
+
+}
+
+.form-container-attendance{
+    height: 30vh;
+}
+
+.form-bubble{
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 15px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+
+}
+
+.form-bubble.container{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    flex:50%;
+    align-items:center;
+    margin: 10px 0;
+}
+
+.form-bubble-container-get{
+    text-align:center;
+    font-weight:400;
+}
+
