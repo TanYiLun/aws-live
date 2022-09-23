@@ -1,46 +1,46 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='StyleSheet.css') }}">
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css">
     <title>Employee Attendance</title>
 </head>
 <body>
-    <div class="navbar">
-        <div class="navbar-left">
+    <div class = "navbar">
+        <div class = "navbar-left">
 
         </div>
 
-        <div class="navbar-middle">
-
+        <div class = "navbar-middle">
+            
         </div>
 
-        <div class="navbar-middle">
-
+        <div class = "navbar-middle">
+            
         </div>
 
     </div>
-    <div class="form-container form-container-get">
-        <form action="/attendance/output" autocomplete="on" method="POST" class="form-bubble">
-            <div class="form-bubble-container">
-                <label>Employee ID:</label>
-                <input type="number" name="emp_id" autofocus size="40">
-            </div>
-            <div class=button-container1>
-                <button type="submit" formaction="/attendanceCheckIn" class="form-button ">CHECK IN</button>
-                <a href="/attendance/output">
-                    <button type="submit" class="form-button ">CHECK OUT</button>
-                </a>
-            </div>
+    <div class="form-attendance form-attendance-2" >
+        <form action="/attendance/output" autocomplete="on" method = "POST" class ="bubble">
+        <div class ="bubble-container">
+            <label>Employee ID:</label>
+            <input type ="number" name ="emp_id" autofocus size ="40">
+        </div>
+    <div class = "outside-container">
+        <button type ="submit" formaction="/attendanceCheckIn" class = "check-button ">CHECK IN</button>
+        <a href = "/attendance/output">
+            <button type ="submit" class = "check-button ">CHECK OUT</button>
+        </a>
+    </div>
 
 
 
         </form>
 
-    </div>
+</div>
 
 
 
 
-
+<center><p><a href="/LoginPageRoute" style="color: #87CEEB; display: block;">Click here to login instead!</a></p></center>   
 </body>
 </html>
