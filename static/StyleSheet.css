@@ -270,7 +270,7 @@ label {
 
 }
 
-.form-bubble.container{
+.form-bubble-container{
     position:relative;
     display:flex;
     flex-direction:column;
