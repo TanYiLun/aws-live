@@ -28,6 +28,10 @@ table = 'employee'
 def home():
     return render_template('Homepage.html')
 
+@app.route("/getemphome")
+def getemployeeHome():
+    return render_template('GetEmp.html')
+
 @app.route("/GetEmpRoute", methods=['GET', 'POST'])
 def GetEmpRoute():
     return render_template('GetEmp.html')
@@ -105,7 +109,9 @@ def registerAccount():
         print("Successfully registered, redirecting to login page")
         return render_template("LoginPage.html")
 
-    
+app.route("/loginhome")
+def loginHome():
+    return render_template("LoginPage.html")   
 
 @app.route("/LoginUser", methods=['POST', 'GET'])
 def LoginUser():
@@ -208,6 +214,10 @@ def checkOut():
     return render_template("AttendanceOutput.html", date=datetime.now(),Checkout = formatted_checkout, 
     LoginTime= formatted_login[0])
 
+app.route("/addemphomepage")
+def emphome():
+    return render_template('AddEmpOutput.html', date=datetime.now())
+
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -257,6 +267,10 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
+
+app.route("/salaryhome")
+def salaryhome():
+    return render_template("SalaryPage.html")
 
 
 @app.route("/InsertSalary", methods=['POST', 'GET'])
