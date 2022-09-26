@@ -138,7 +138,9 @@ def LoginUser():
 def toLoginPage():
     return render_template('LoginPage.html')
 
-
+@app.route("/attendance")
+def attendance():
+    return render_template('AttendanceTaking.html', date=datetime.now())
 
 @app.route("/attendanceCheckIn", methods=['POST', 'GET'])
 def checkInAttendance():
