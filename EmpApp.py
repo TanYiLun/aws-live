@@ -208,9 +208,9 @@ def checkOut():
     return render_template("AttendanceOutput.html", date=datetime.now(),Checkout = formatted_checkout, 
     LoginTime= formatted_login[0])
 
-app.route("/addemphomepage", methods=['GET'])
+app.route("/addemphomepage")
 def addemphome():
-    return render_template('AddEmpOutput.html', date=datetime.now())
+    return render_template('AddEmp.html', date=datetime.now())
 
 
 @app.route("/addemp", methods=['POST'])
