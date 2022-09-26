@@ -7,14 +7,6 @@ body {
     flex-direction:column;
 }
 
-.navbar{
-    display:flex;
-    height:60px;
-}
-
-.navbar-left{
-    flex:20%;
-}
 
 .login-box {
     margin-top: 75px;
