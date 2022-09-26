@@ -264,7 +264,7 @@ def AddEmp():
 
 @app.route("/salaryhome")
 def salaryhome():
-    return render_template("PaySal.html")
+    return render_template("SalaryPage.html")
 
 
 @app.route("/InsertSalary", methods=['POST', 'GET'])
