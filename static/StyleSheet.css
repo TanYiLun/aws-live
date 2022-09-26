@@ -7,28 +7,6 @@ body {
     flex-direction:column;
 }
 
-.navbar{
-    display:flex;
-    height:20px;
-}
-
-.navbar-left{
-    flex:20%;
-}
-
-.navbar-left a{
-    display:flex;
-    align-items:center;
-    justify-content:start;
-}
-
-.navbar-left img{
-    height:15%;
-    width:15%;
-    object-fit:contain;
-    margin: 0 200px 0 0;
-
-}
 
 .login-box {
     margin-top: 75px;
