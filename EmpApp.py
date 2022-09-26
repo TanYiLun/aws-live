@@ -134,7 +134,7 @@ def LoginUser():
         return render_template('LoginPage.html')
 
 
-@app.route("/LoginPageRoute", methods=['POST'])
+@app.route("/LoginPageRoute")
 def toLoginPage():
     return render_template('LoginPage.html')
 
