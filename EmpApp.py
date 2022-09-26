@@ -1,8 +1,6 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request
 from pymysql import connections
-from datetime import datetime
 import os
-import re
 import boto3
 from config import *
 
@@ -23,186 +21,14 @@ output = {}
 table = 'employee'
 
 
-
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('GetSal.html')
+    return render_template('AddEmp.html')
 
-@app.route("/GetEmpRoute", methods=['GET', 'POST'])
-def GetEmpRoute():
-    return render_template('GetEmp.html')
-
-@app.route("/GetEmp", methods=['GET', 'POST'])
-def GetEmp():
-    emp_id = (request.form['emp_id']).lower()
-    check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_id = re.sub('\W+','', str(cursor.fetchall()))
-    check_sql = "SELECT first_name FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_fname = re.sub('\W+','', str(cursor.fetchall()))
-    check_sql = "SELECT last_name FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_lname = re.sub('\W+','', str(cursor.fetchall()))
-    check_sql = "SELECT pri_skill FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_interest = re.sub('\W+','', str(cursor.fetchall()))
-    check_sql = "SELECT location FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_location = re.sub('\W+','', str(cursor.fetchall()))
-    check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_image_url = re.sub('\W+','', str(cursor.fetchall()))
-    if str(emp_fname) != "":
-        return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
-        lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
-    else:
-        print("Invalid ID")
-        return render_template('GetEmp.html')
 
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
-
-@app.route("/RegisterPageRoute", methods=['POST', 'GET'])
-def toRegisterPage():
-    return render_template('RegisterPage.html')
-
-@app.route("/Register", methods=['POST', 'GET'])
-def registerAccount():
-#to read user
-    user_id = (request.form['user_id']).lower()
-    user_password = request.form['user_password']
-    user_confirm_password = request.form["user_confirm_password"]
-
-    insert_sql = "INSERT INTO user VALUES (%s, %s)"
-    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (user_id))
-    userid_no=cursor.fetchall()
-
-    if user_confirm_password!=user_password:
-        print("Confirm your password again")
-        return render_template('RegisterPage.html')
-    elif str(userid_no) != "()":
-        print("User Id already exist")
-        return render_template('RegisterPage.html')
-    else:
-        try:
-
-            cursor.execute(insert_sql, (user_id, user_password))
-            db_conn.commit()
-
-        finally:
-            cursor.close()
-
-        print("Successfully registered, redirecting to login page")
-        return render_template("LoginPage.html")
-
-    
-
-@app.route("/LoginUser", methods=['POST', 'GET'])
-def LoginUser():
-    user_id = (request.form['user_id']).lower()
-    user_password = request.form['user_password']
-
-    check_id = "SELECT COUNT(user_id) FROM user WHERE user_id=(%s)"
-    check_pw = "SELECT COUNT(user_password) FROM user WHERE user_password=(%s)"
-    correct_id = False
-    correct_pw = False
-    cursor = db_conn.cursor()
-
-    if (cursor.execute(check_id, (user_id)))>0:
-        correct_id = True
-
-    if (cursor.execute(check_pw, (user_password)))>0:
-        correct_pw = True
-   
-    if correct_id and correct_pw:
-        print("Login successful")
-        return render_template('AddEmp.html')
-    else:
-        print("Invalid user id or/and password")
-        correct_id = False
-        correct_pw = False
-        return render_template('LoginPage.html')
-
-
-@app.route("/LoginPageRoute", methods=['POST'])
-def toLoginPage():
-    return render_template('LoginPage.html')
-
-@app.route("/attendanceCheckIn", methods=['POST', 'GET'])
-def checkInAttendance():
-    emp_id = request.form['emp_id']
-
-    update_statement = "UPDATE employee SET check_in = (%(check_in)s) WHERE emp_id = %(emp_id)s"
-
-    cursor = db_conn.cursor()
-
-    LoginTime = datetime.now()
-    formatted_login = LoginTime.strftime('%Y-%m-%d %H:%M:%S')
-    print("Check in time:{}", formatted_login)
-
-    try:
-        cursor.execute(update_statement, {'check_in' : formatted_login, 'emp_id':int(emp_id)})
-        db_conn.commit()
-        print("Data updated")
-    
-    except Exception as e:
-        return str(e)
-
-    finally:
-        cursor.close()
-
-    return render_template("AttendanceOutput.html", date = datetime.now(),
-    LoginTime = formatted_login)
-
-@app.route("/attendance/output",methods=['GET','POST'])
-def checkOut():
-
-    emp_id = request.form['emp_id']
-    select_statement = "SELECT check_in FROM employee WHERE emp_id = %(emp_id)s"
-    insert_statement = "INSERT INTO attendance VALUES (%s,%s,%s)"
-
-    cursor = db_conn.cursor()
-
-    try:
-        cursor.execute(select_statement,{'emp_id': int(emp_id)})
-        LoginTime= cursor.fetchall()
-
-        for row in LoginTime:
-            formatted_login = row
-            print(formatted_login[0])
-
-        checkOutTime = datetime.now()
-        LoginDate = datetime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
-
-        formatted_checkout = checkOutTime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
-
-        try:
-           cursor.execute(insert_statement,(emp_id,formatted_login[0],formatted_checkout))
-           db_conn.commit()
-           print("Data inserted")
-
-        except Exception as e:
-              return str(e)
-
-
-    except Exception as e:
-          return str(e)
-
-    finally:
-          cursor.close()
-
-    return render_template("AttendanceOutput.html", date=datetime.now(),Checkout = formatted_checkout, 
-    LoginTime= formatted_login[0])
 
 
 @app.route("/addemp", methods=['POST'])
@@ -253,88 +79,6 @@ def AddEmp():
 
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
-
-
-@app.route("/InsertSalary", methods=['POST', 'GET'])
-def InsertSalary():
-    #to read user
-    user_id = (request.form['user_id']).lower()
-    user_salary = request.form['user_salary']
-    salary_status = "False"
-    if not user_salary.isnumeric():
-        print("Invalid Input Only! Please input numbers only")
-        return render_template('SalaryPage.html')
- 
-
-    insert_sql = "INSERT INTO salary VALUES (%s, %s, %s)"
-    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (user_id))
-    userid_no=cursor.fetchall()
-
-   
-    if str(userid_no) != "()":
-        cursor.execute(insert_sql, (user_id, user_salary, salary_status))
-        
-    else :
-        print("User does not exist")
-        return render_template('SalaryPage.html')
-
-#
-
-    db_conn.commit()
-
-    cursor.close()
-
-    #print("Successfully registered, redirecting to login page")
-    return render_template('PaySal.html')
-
-@app.route("/PaySal", methods=['GET', 'POST'])
-def PaySal():
-    user_id = (request.form['user_id']).lower()
-    insert_sql = "UPDATE salary SET salary_status = 'True' WHERE user_id = (%s)"
-    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (user_id))
-    userid_no=cursor.fetchall()
-
-   
-    if str(userid_no) != "()":
-        cursor.execute(insert_sql, (user_id))
-        
-    else :
-        print("User does not exist")
-        return render_template('GetSal.html')
-
-    db_conn.commit()
-
-    cursor.close()
-
-    return render_template('PaidOutput.html')
-
-
-@app.route("/ResetSal", methods=['GET', 'POST'])
-def ResetSal():
-    user_id = (request.form['user_id']).lower()
-    insert_sql = "UPDATE salary SET salary_status = 'False' WHERE user_id = (%s)"
-    check_sql = "SELECT * FROM user WHERE user_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (user_id))
-    userid_no=cursor.fetchall()
-
-   
-    if str(userid_no) != "()":
-        cursor.execute(insert_sql, (user_id))
-        
-    else :
-        print("User does not exist")
-        return render_template('GetSal.html')
-
-    db_conn.commit()
-
-    cursor.close()
-
-    return render_template('GetSal.html')
 
 
 if __name__ == '__main__':
