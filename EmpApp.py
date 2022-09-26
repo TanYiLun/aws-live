@@ -28,11 +28,11 @@ table = 'employee'
 def home():
     return render_template('AttendanceTaking.html')
 
-@app.route("/GetEmpRoute/", methods=['GET', 'POST'])
+@app.route("/GetEmpRoute", methods=['GET', 'POST'])
 def GetEmpRoute():
     return render_template('GetEmp.html')
 
-@app.route("/GetEmp/", methods=['GET', 'POST'])
+@app.route("/GetEmp", methods=['GET', 'POST'])
 def GetEmp():
     emp_id = (request.form['emp_id']).lower()
     check_sql = "SELECT emp_id FROM employee WHERE emp_id=(%s)"
@@ -66,15 +66,15 @@ def GetEmp():
         print("Invalid ID")
         return render_template('GetEmp.html')
 
-@app.route("/about/", methods=['POST'])
+@app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
 
-@app.route("/RegisterPageRoute/", methods=['POST', 'GET'])
+@app.route("/RegisterPageRoute", methods=['POST', 'GET'])
 def toRegisterPage():
     return render_template('RegisterPage.html')
 
-@app.route("/Register/", methods=['POST', 'GET'])
+@app.route("/Register", methods=['POST', 'GET'])
 def registerAccount():
 #to read user
     user_id = (request.form['user_id']).lower()
@@ -107,7 +107,7 @@ def registerAccount():
 
     
 
-@app.route("/LoginUser/", methods=['POST', 'GET'])
+@app.route("/LoginUser", methods=['POST', 'GET'])
 def LoginUser():
     user_id = (request.form['user_id']).lower()
     user_password = request.form['user_password']
@@ -134,15 +134,15 @@ def LoginUser():
         return render_template('LoginPage.html')
 
 
-@app.route("/LoginPageRoute/", methods=['POST'])
+@app.route("/LoginPageRoute", methods=['POST'])
 def toLoginPage():
     return render_template('LoginPage.html')
 
-@app.route("/attendannce/")
+@app.route("/attendannce")
 def attendance():
     return render_template("AttendanceTaking.html", date=datetime.now())
 
-@app.route("/attendanceCheckIn/", methods=['POST', 'GET'])
+@app.route("/attendanceCheckIn", methods=['POST', 'GET'])
 def checkInAttendance():
     emp_id = request.form['emp_id']
 
@@ -209,7 +209,7 @@ def checkOut():
     LoginTime= formatted_login[0])
 
 
-@app.route("/addemp/", methods=['POST'])
+@app.route("/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -259,7 +259,7 @@ def AddEmp():
     return render_template('AddEmpOutput.html', name=emp_name)
 
 
-@app.route("/InsertSalary/", methods=['POST', 'GET'])
+@app.route("/InsertSalary", methods=['POST', 'GET'])
 def InsertSalary():
     #to read user
     user_id = (request.form['user_id']).lower()
@@ -293,7 +293,7 @@ def InsertSalary():
     #print("Successfully registered, redirecting to login page")
     return render_template('PaySal.html')
 
-@app.route("/PaySal/", methods=['GET', 'POST'])
+@app.route("/PaySal", methods=['GET', 'POST'])
 def PaySal():
     user_id = (request.form['user_id']).lower()
     insert_sql = "UPDATE salary SET salary_status = 'True' WHERE user_id = (%s)"
@@ -317,7 +317,7 @@ def PaySal():
     return render_template('PaidOutput.html')
 
 
-@app.route("/ResetSal/", methods=['GET', 'POST'])
+@app.route("/ResetSal", methods=['GET', 'POST'])
 def ResetSal():
     user_id = (request.form['user_id']).lower()
     insert_sql = "UPDATE salary SET salary_status = 'False' WHERE user_id = (%s)"
