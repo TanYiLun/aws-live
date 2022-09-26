@@ -208,7 +208,7 @@ def checkOut():
     return render_template("AttendanceOutput.html", date=datetime.now(),Checkout = formatted_checkout, 
     LoginTime= formatted_login[0])
 
-app.route("/addemphomepage")
+app.route("/addemphomepage", methods=['GET','POST'])
 def addemphome():
     return render_template('AddEmpOutput.html', date=datetime.now())
 
@@ -262,7 +262,7 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-app.route("/salaryhome", methods=['POST', 'GET'])
+app.route("/salaryhome")
 def salaryhome():
     return render_template("SalaryPage.html")
 
