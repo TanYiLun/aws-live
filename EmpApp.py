@@ -247,7 +247,10 @@ def AddEmp():
             else:
                 s3_location = '-' + s3_location
                # s3-tanyilun-bucket.s3.amazonaws.com/emp-id-1122_image_file
-            object_url = "https://s3-tanyilun-bucket.s3.amazonaws.com/emp-id-"+str(emp_id) +"_image_file"
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
 
         except Exception as e:
             return str(e)
