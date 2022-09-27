@@ -221,7 +221,7 @@ def AddEmp():
     emp_image_file = request.files['emp_image_file']
     check_in = ''
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -229,7 +229,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,check_in))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -246,7 +246,7 @@ def AddEmp():
                 s3_location = ''
             else:
                 s3_location = '-' + s3_location
-               # s3-tanyilun-bucket.s3.amazonaws.com/emp-id-1122_image_file
+                s3-tanyilun-bucket.s3.amazonaws.com/emp-id-1122_image_file
             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
