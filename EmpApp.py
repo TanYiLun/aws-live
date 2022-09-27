@@ -57,9 +57,7 @@ def GetEmp():
     cursor.execute(check_sql, (emp_id))
     emp_location = re.sub('\W+','', str(cursor.fetchall()))
     check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_image_url = re.sub('\W+','', str(cursor.fetchall()))
+    emp_image_url = "https://s3-tanyilun-bucket.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     if str(emp_fname) != "":
         return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
         lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
@@ -213,7 +211,7 @@ def addemphome():
     return render_template('AddEmp.html')
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/addemp", methods=['GET','POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -221,8 +219,9 @@ def AddEmp():
     pri_skill = request.form['pri_skill']
     location = request.form['location']
     emp_image_file = request.files['emp_image_file']
+    check_in = ''
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -230,7 +229,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,check_in))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
