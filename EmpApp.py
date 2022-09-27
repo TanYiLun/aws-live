@@ -213,7 +213,7 @@ def addemphome():
     return render_template('AddEmp.html')
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/addemp", methods=['GET','POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
