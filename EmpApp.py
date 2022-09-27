@@ -299,7 +299,7 @@ def InsertSalary():
     cursor.close()
 
     #print("Successfully registered, redirecting to login page")
-    return render_template('PaySal.html')
+    return render_template('GetSal.html')
 
 @app.route("/GetSal", methods=['GET', 'POST'])
 def GetSal():
