@@ -211,7 +211,7 @@ def addemphome():
     return render_template('AddEmp.html')
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/addEmp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -219,9 +219,9 @@ def AddEmp():
     pri_skill = request.form['pri_skill']
     location = request.form['location']
     emp_image_file = request.files['emp_image_file']
-    check_in = ''
+    check_in =""
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s,%s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -229,7 +229,7 @@ def AddEmp():
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,check_in))
+        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,email,salary,password))
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -247,7 +247,7 @@ def AddEmp():
             else:
                 s3_location = '-' + s3_location
 
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+            object_url = "https://s3/%7B0%7D.amazonaws.com/%7B1%7D/%7B2%7D%22.format(
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
