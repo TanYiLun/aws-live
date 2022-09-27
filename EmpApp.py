@@ -301,8 +301,8 @@ def InsertSalary():
     #print("Successfully registered, redirecting to login page")
     return render_template('PaySal.html')
 
-@app.route("/PaySal", methods=['GET', 'POST'])
-def PaySal():
+@app.route("/GetSal", methods=['GET', 'POST'])
+def GetSal():
     user_id = (request.form['user_id']).lower()
     insert_sql = "UPDATE salary SET salary_status = 'True' WHERE user_id = (%s)"
     check_sql = "SELECT * FROM user WHERE user_id=(%s)"
