@@ -247,7 +247,7 @@ def AddEmp():
             else:
                 s3_location = '-' + s3_location
 
-            object_url = "https://tanyilun-employee.s3.amazonaws.com".format(
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
