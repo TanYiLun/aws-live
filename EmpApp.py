@@ -57,9 +57,7 @@ def GetEmp():
     cursor.execute(check_sql, (emp_id))
     emp_location = re.sub('\W+','', str(cursor.fetchall()))
     check_sql = "SELECT check_in FROM employee WHERE emp_id=(%s)"
-    cursor = db_conn.cursor()
-    cursor.execute(check_sql, (emp_id))
-    emp_image_url = re.sub('\W+','', str(cursor.fetchall()))
+    emp_image_url = "https://tanyilun-employee.s3.amazonaws.com/emp-id-" + str(emp_id) + "_image_file"
     if str(emp_fname) != "":
         return render_template('GetEmpOutput.html', id=emp_id, fname=emp_fname, 
         lname=emp_lname, interest=emp_interest, location=emp_location, image_url = emp_image_url)
