@@ -145,7 +145,7 @@ def toLoginPage():
 def attendance():
     return render_template('AttendanceTaking.html', date=datetime.now())
 
-@app.route("/attendanceCheckIn", methods=['POST', 'GET'])
+@app.route("/attendanceCheckIn", methods=['GET','POST'])
 def checkInAttendance():
     emp_id = request.form['emp_id']
 
