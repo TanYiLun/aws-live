@@ -112,14 +112,19 @@ def LoginUser():
 
     check_id = "SELECT * FROM user WHERE user_id=(%s)"
     check_pw = "SELECT * FROM user WHERE user_password=(%s)"
+    cursor.execute(check_id, (user_id))
+    id_sql = str(cursor.fetchall())
+    cursor.execute(check_id, (user_password))
+    pw_sql = str(cursor.fetchall())
     correct_id = False
     correct_pw = False
     cursor = db_conn.cursor()
-
-    if str(cursor.execute(check_id, (user_id)))!="()":
+    
+    
+    if id_sql !="()":
         correct_id = True
 
-    if str(cursor.execute(check_pw, (user_password)))!="()":
+    if pw_sql !="()":
         correct_pw = True
    
     if correct_id and correct_pw:
