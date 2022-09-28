@@ -191,7 +191,7 @@ def checkOut():
         checkOutTime = datetime.now()
         LoginDate = datetime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
 
-        formatted_checkout = checkOutTime.strpime(formatted_login[0],'%Y-%m-%d %H:%M:%S')
+        formatted_checkout = checkOutTime.strptime(formatted_login[0],'%Y-%m-%d %H:%M:%S' )
 
         try:
            cursor.execute(insert_statement,(emp_id,formatted_login[0],formatted_checkout))
