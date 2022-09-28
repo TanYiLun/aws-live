@@ -119,7 +119,7 @@ def LoginUser():
     if str(cursor.execute(check_id, (user_id)))!="()":
         correct_id = True
 
-    if str(cursor.execute(check_pw, (user_password))!="()":
+    if str(cursor.execute(check_pw, (user_password)))!="()":
         correct_pw = True
    
     if correct_id and correct_pw:
